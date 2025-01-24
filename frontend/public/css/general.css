@@ -1,0 +1,380 @@
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP');
+
+/* html,body {
+  overflow: hidden;
+} */
+
+body {
+  background-color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.loginBody {
+  background-color: rgb(109, 210, 101);
+  height: 100vh;
+  overflow: hidden;display: flex;
+  align-items: center;
+  /* position: relative; */
+}
+
+.login-container {
+  /* position: absolute;
+  left: 50%;
+  top: 50%; */
+  margin: 10% auto;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.login-container h1 {
+  margin: 0;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  color: rgb(29, 209, 16);
+}
+
+.login-form {
+  text-align: center;
+}
+
+#email,
+#password,
+#nickname {
+  text-align: center;
+  background-color: #ECF0F1;
+  border: 2px solid transparent;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 200;
+  padding: 10px 0;
+  margin: 5px 0;
+  width: 250px;
+  transition: border .5s;
+}
+
+.loginButton {
+  border: 2px solid transparent;
+  background: rgb(29, 209, 16);
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 10px 0;
+  text-decoration: none;
+  text-shadow: none;
+  border-radius: 3px;
+  box-shadow: none;
+  transition: 0.25s;
+  display: block;
+  width: 250px;
+  margin: 5px auto;
+}
+
+.loginButton:hover {
+  background-color: rgb(23, 154, 13);
+}
+
+.signUp {
+  text-decoration: none;
+  color: #000000;
+}
+
+.signUp:hover {
+  text-decoration: underline;
+}
+
+.delete-button {
+  background-color: #ff0000;
+  color: #ffffff;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.header {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  /* position: fixed;
+  top: 0; */
+  position: relative;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.header h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  padding: 0;
+  margin: 0 auto;
+  color: rgb(29, 209, 16);
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+}
+
+.header a {
+  font-size: 35px;
+  text-decoration: none;
+  color: rgb(29, 209, 16);
+  position: absolute;
+  left: 20px;
+  z-index: 2;
+}
+
+.userName {
+  width: 100px;
+  height: 50px;
+  position: absolute;
+  right: 140px;
+  vertical-align: middle;
+  text-align: right;
+}
+
+.logoutButton {
+  position: absolute;
+  right: 0;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  width: 120px;
+  height: 50px;
+  margin: auto;
+  color: #fff;
+  background-color: rgb(29, 209, 16);
+  transition: 0.2s;
+  border: none;
+}
+
+.logoutButton:hover {
+  background-color: rgb(20, 134, 12);
+}
+
+
+.backButton {
+  margin: 0px, auto, 0px, 30px;
+  padding: 0;
+}
+
+.main {
+  align-items: center;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/*フォーム全体*/
+#searchForm{
+  display: flex;
+  justify-content: center; 	
+  border: none;
+  background-color: #eeeeee;
+  max-width: 500px;
+  height:30px;
+  margin: 30px auto;
+  border-radius: 20px;
+  }
+/*入力フォーム*/
+#search{ 
+  width:440px ;
+  padding: 0 15px;
+  background-color: #eeeeee;
+  border-radius: 20px;
+  border:none;
+  outline:0;
+}
+/*検索ボタン*/
+#sbtn{
+  width: 50px;
+  border-radius: 20px;
+  border:none;
+  color:#666;
+  font-size:18px;
+  cursor: pointer;
+  transition: 0.1s;
+}
+#sbtn4:hover{
+color:rgb(109, 210, 101);
+}
+
+.createMain {
+  /* overflow: hidden; */
+  /* padding-top: 7%; */
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 50px);
+  background-color: rgb(109, 210, 101);
+}
+
+.createBox {
+  /* border: 2px solid #ff0000; */
+  width: 40%;
+  margin: auto;
+  padding: 40px 100px;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #FFF;
+  /* display: grid; */
+}
+
+.bolder {
+  font-weight: bold;
+}
+
+#title, #data{
+  background-color: #ECF0F1;
+  border: 2px solid transparent;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 200;
+  padding: 10px 0;
+  margin: 5px 0;
+  width: 250px;
+}
+
+#data {
+  width: 100%;
+} 
+
+#message-area {
+  margin-top: 10px;
+  text-align: center;
+  height: 10px;
+}
+
+.buttonArea {
+  text-align: center;
+}
+
+.postButton {
+  width: 80px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 4px;
+  border: none;
+  color: #FFF;
+  background-color: rgb(29, 209, 16);
+}
+
+.postButton:hover  {
+  transition: 0.2s;
+  background-color: rgb(20, 134, 12);
+}
+
+.startDebate {
+  text-align: center;
+}
+
+.startDebate h3 {
+  margin: 0;
+}
+
+#data-list {
+  width: 80%;
+  margin: 15px auto;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column; /* 縦一列に並べる */
+  gap: 10px; /* アイテム間の間隔を設定 */
+}
+
+/* .data-item {
+  margin: 0;
+  padding: 10px;
+  width: 100%; 
+  background-color: #f1fff2;
+  border: 1px solid rgb(18, 173, 7);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition-duration: .1s;
+} */
+
+.data-item {
+  margin: 0;
+  padding: 10px;
+  width: 100%;
+  background-color: #d9ffdc;
+  border:none;
+  border-radius: 15px;
+  transition-duration: .1s;
+}
+
+.data-item:hover {
+  transform: scale(1.03); 
+}
+
+.data-item a {
+  display: block;
+  color: black;
+  text-decoration: none;
+}
+
+.data-item h2 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow:  ellipsis;
+  margin: 0 20px 0 10px;
+}
+
+.data-item p {
+  margin: 0;
+  text-align: right;
+}
+
+.jsmind-inner {
+  white-space: pre-wrap; /* 折り返しを許可しつつ、改行も反映 */
+  word-wrap: break-word; /* 長い単語を強制的に折り返す */
+  overflow-wrap: break-word; /* overflow-wrapは現在の仕様に沿ったプロパティ */
+}
+
+.createButton {
+  position: fixed;
+  bottom: 50px;
+  right: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+  background: rgb(29, 209, 16);
+  color: #FFF;
+  text-decoration: none;
+  text-align: center;
+  margin: 10px 0;
+  font-weight: bold;
+  font-size: 100px;
+  border: none;
+  transition: 0.3s;
+  z-index: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+}
+
+.createButton:hover {
+  border: 3px solid rgb(29, 209, 16);
+  color: rgb(29, 209, 16);
+  background-color: white;
+  font-size: 120px;
+}
+
+.footer {
+  text-align: right;
+}
+
+.footer p {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+}

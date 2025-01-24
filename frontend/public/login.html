@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login | DebateMap</title>
+  <!-- cssファイルをimport -->
+  <link rel="stylesheet" href="/css/general.css">
+
+  <!-- jsファイルをimport -->
+  <script type="text/javascript" src="/js/general.js"></script>
+  <script type="text/javascript" src="/js/api.js"></script>
+</head>
+
+<body>
+  <div class="loginBody">
+    <div class="login-container">
+      <div class="app-title">
+        <h1>DebateMap</h1>
+      </div>
+      <div class="login-form">
+        <div id="megs" style="color: red;">&nbsp;</div>
+        <label for="email"></label>
+        <input type="email" id="email" name="email" required placeholder="E-mail">
+        <br />
+        <label for="password"></label>
+        <input type="password" id="password" name="password" required placeholder="Password">
+        <button onclick="login()" class="loginButton">Login</button>
+        <div>
+          <h4><a href="/signup.html" class="signUp">To SignUp</a></h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  if (checkLogin()) {
+    location.href = "/index.html"
+  }
+
+  const login = async () => {
+    // フォームの値を取得
+    // .trim()で前後の空白を削除
+    const email = document.getElementById('email').value.trim()
+    const password = document.getElementById('password').value
+
+    // メッセージを表示するための要素を取得
+    const megsBox = document.getElementById('megs')
+
+    // 全ての項目が入力されているかチェック
+    if (email === '' || password === '') {
+      megsBox.innerText = 'Fill in all fields'
+      return
+    }
+
+    const response = await fetch("http://localhost:8000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json()
+      localStorage.setItem('token', data.token)
+      location.href = "/index.html"
+    } else {
+      megsBox.innerText = 'Login failed'
+    }
+  }
+</script>
+
+</html>

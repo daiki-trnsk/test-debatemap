@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>DebateMap</title>
+  <link rel="stylesheet" href="/css/general.css">
+  <link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/npm/jsmind@0.8.4/style/jsmind.css" />
+  <script src="//cdn.jsdelivr.net/npm/jsmind@0.8.4/es6/jsmind.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jsmind@0.8.4/es6/jsmind.draggable-node.js"></script>
+  <style type="text/css">
+    #jsmind_container {
+      width: 99.9%;
+      height: calc(100vh - 70px);
+      border-bottom: solid 1px #ccc;
+      background: #f4f4f4;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1><a href="index.html">⇦</a></h1>
+    <h1 class="title">DebateMap</h1>
+  </div>
+  <div class="main">
+    <div id="jsmind_container"></div>
+  </div>
+  <div class="footer">
+    <p>操作方法：任意の投稿を選択(青色)、Enterで返信を作成、Deleteで削除　</p>
+  </div>
+</body>
+
+<script type="text/javascript">
+  const getMindMapDetailApi = async (mindmapId) => {
+    const API_HOST = "http://localhost:8000";
+    const URL = `${API_HOST}/debatemap/${mindmapId}`;
+
+    try {
+      const response = await fetch(URL, { 
+        method: "GET" ,
+        headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  };
+  // TODO: meta format 意味要確認
+  // mindmap title
+  // mindmap data
+  var mind = {
+    meta: {
+      name: "demo",
+      version: "0.2",
+    },
+    format: "node_tree",
+    data: {},
+  };
+
+  var options = {
+    container: "jsmind_container",
+    editable: true,
+    theme: "nephrite",
+    view: {
+      node_overflow: 'wrap',
+      draggable: true,
+      hide_scrollbars_when_draggable: true,
+    },
+    shortcut: {
+      mapping: {
+        addchild: 13,
+        addbrother: [45, 4096 + 13],
+      }
+    }
+  };
+  var jm = new jsMind(options);
+  // jm.show(mind);
+  // jm.set_readonly(true);
+  // var mind_data = jm.get_data();
+  // alert(mind_data);
+  // jm.add_node("sub2", "sub23", "new node", { "background-color": "red" });
+  // jm.set_node_color("sub21", "green", "#ccc");
+
+  // const getMindMapNodesData = () => {
+  //   const mind_data = jm.get_data().data;
+  //   console.log(mind_data);
+  // };
+  const loadMindMap = async () => {
+    const mindmapId = new URLSearchParams(location.search).get("mindmapId");
+    if (!mindmapId) {
+      alert("MindMapIDが指定されていません");
+      location.href = "/index.html";
+    }
+
+    try {
+      const mindmapData = await getMindMapDetailApi(mindmapId);
+      console.log("mindmapData", mindmapData)
+      mind.data = mindmapData.nodes_json;
+      jm.show(mind);
+      var rootNodeId = mind.data.id;
+      jm.set_node_color(rootNodeId, 'green', '#f4f4f4');
+    } catch (error) {
+      console.error("Error fetching Mindmap detail:", error);
+      // エラーハンドリング
+    }
+  };
+
+  loadMindMap();
+
+  const saveMindMapNodesData = async () => {
+    const mind_data = jm.get_data().data;
+    console.log("Saving mindmap data: ", mind_data);
+
+    const mindmapId = new URLSearchParams(location.search).get("mindmapId");
+    const API_HOST = "http://localhost:8000";
+    const url = `${API_HOST}/update/${mindmapId}`;
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${localStorage.getItem("token")}`
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: "PUT",
+        headers,
+        body: JSON.stringify({
+          nodes_json: mind_data
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`)
+      }
+      console.log("Mindmap data saved successfully!");
+    } catch (error) {
+      console.error("Save error", error)
+    }
+  };
+
+  // 自動保存
+  const autoSaveInterval = 30000; // 30秒ごとに自動保存
+  setInterval(saveMindMapNodesData, autoSaveInterval);
+
+  // ページが離れる直前に保存
+  window.addEventListener('beforeunload', saveMindMapNodesData);
+</script>
+
+</html>
