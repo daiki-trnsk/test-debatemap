@@ -12,84 +12,6 @@ body {
   padding: 0;
 }
 
-.loginBody {
-  background-color: rgb(109, 210, 101);
-  height: 100vh;
-  overflow: hidden;display: flex;
-  align-items: center;
-  /* position: relative; */
-}
-
-.login-container {
-  /* position: absolute;
-  left: 50%;
-  top: 50%; */
-  margin: 10% auto;
-  width: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.login-container h1 {
-  margin: 0;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  color: rgb(29, 209, 16);
-}
-
-.login-form {
-  text-align: center;
-}
-
-#email,
-#password,
-#nickname {
-  text-align: center;
-  background-color: #ECF0F1;
-  border: 2px solid transparent;
-  border-radius: 3px;
-  font-size: 16px;
-  font-weight: 200;
-  padding: 10px 0;
-  margin: 5px 0;
-  width: 250px;
-  transition: border .5s;
-}
-
-.loginButton {
-  border: 2px solid transparent;
-  background: rgb(29, 209, 16);
-  color: #ffffff;
-  font-size: 16px;
-  line-height: 25px;
-  padding: 10px 0;
-  text-decoration: none;
-  text-shadow: none;
-  border-radius: 3px;
-  box-shadow: none;
-  transition: 0.25s;
-  display: block;
-  width: 250px;
-  margin: 5px auto;
-}
-
-.loginButton:hover {
-  background-color: rgb(23, 154, 13);
-}
-
-.signUp {
-  text-decoration: none;
-  color: #000000;
-}
-
-.signUp:hover {
-  text-decoration: underline;
-}
-
 .delete-button {
   background-color: #ff0000;
   color: #ffffff;
@@ -141,26 +63,6 @@ body {
   vertical-align: middle;
   text-align: right;
 }
-
-.logoutButton {
-  position: absolute;
-  right: 0;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  width: 120px;
-  height: 50px;
-  margin: auto;
-  color: #fff;
-  background-color: rgb(29, 209, 16);
-  transition: 0.2s;
-  border: none;
-}
-
-.logoutButton:hover {
-  background-color: rgb(20, 134, 12);
-}
-
 
 .backButton {
   margin: 0px, auto, 0px, 30px;

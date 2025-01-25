@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>DebateMap</title>
-    <link rel="stylesheet" href="/css/general.css">
-    <script type="text/javascript" src="/js/general.js"></script>
-    <script type="text/javascript" src="/js/api.js"></script>
+    <link rel="stylesheet" href="css/general.css">
 </head>
 
 <body>
@@ -29,24 +27,15 @@
     </div>
 </body>
 <script>
-    // if (!checkLogin()) {
-    //     handleLoginError();
-    // }
-    // getMeApi().then((data) => {
-    //     console.log("data:", data);
-    //     const welcomeH1 = document.getElementById("welcome");
-    // //     welcomeH1.innerText = `ようこそ、${data.nickname}さん`;
-    // });
-    // const API_HOST = "http://localhost:8000";
     let elem = document.getElementById("message-area");
     const postApi = async (content) => {
+        const API_HOST = 'http://localhost:8000'
         const POSTARTICLE_ENDPOINT = "/adddebatemap";
         const URL = API_HOST + POSTARTICLE_ENDPOINT;
         const responce = await fetch(URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
             body: JSON.stringify(content),
         });
@@ -59,12 +48,7 @@
             root_node_topic: DTEXT,
         };
         const response = await postApi(content);
-        console.log(content)
-        // const aid = response.id;
-        // const timestamp = response.registration_date;
-        // const uid = response.user_id;
-        // elem.innerHTML = `ID: ${aid} <br> TIMESTAMP: ${timestamp}
-        // <br>User ID: ${uid}`;
+        console.log(content);
         elem.innerHTML = `${response}`;
         DBOX.value = "";
     };

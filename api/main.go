@@ -4,18 +4,21 @@ import (
 	"log"
 	"os"
 
-	"github.com/daiki-trnsk/go-debatemap/api/controllers"
-	customMiddleware "github.com/daiki-trnsk/go-debatemap/api/middleware"
+	"github.com/daiki-trnsk/test-debatemap/api/controllers"
+	"github.com/daiki-trnsk/test-debatemap/api/database"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/joho/godotenv"
 )
 
 func main() {
-	err := godotenv.Load()
+    err := godotenv.Load("/app/.env")
     if err != nil {
-        log.Fatal("Error loading .env file")
+        log.Fatalf("Error loading .env file: %v", err)
     }
+
+	
+    database.Client = database.DBSet()
 	
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -27,15 +30,11 @@ func main() {
 	e.Use(middleware.Recover())
 
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-        AllowOrigins: []string{"http://localhost:3000"},
+        AllowOrigins: []string{"*"},
         AllowMethods: []string{echo.GET, echo.POST, echo.PUT, echo.DELETE},
     }))
 
-	e.POST("/signup", controllers.SignUp)
-	e.POST("/login", controllers.Login)
-
 	auth := e.Group("")
-	auth.Use(customMiddleware.Authentication)
 	auth.GET("/debatemaps_list", controllers.GetDebateMaps)
 	auth.GET("/debatemap/:id", controllers.GetDebateMap)
 	auth.PUT("/update/:id", controllers.UpdateDebateMap)

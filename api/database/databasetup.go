@@ -11,7 +11,7 @@ import (
 )
 
 func DBSet() *mongo.Client {
-	uri := "mongodb://localhost:27017"
+	uri := "mongodb://mongo:27017"
 	clientOptions := options.Client().ApplyURI(uri)
 	client, err := mongo.NewClient(clientOptions)
 	if err != nil {
@@ -24,23 +24,17 @@ func DBSet() *mongo.Client {
 		log.Fatal(err)
 	}
 
-	err = client.Ping(context.TODO(), nil)
-	if err != nil {
-		log.Println("failed to connect to mongodb")
-		return nil
-	}
+    err = client.Ping(context.TODO(), nil)
+    if err != nil {
+        log.Fatalf("Failed to ping MongoDB: %v", err)
+    }
 	fmt.Println("Successfully Connected to the mongodb")
 	return client
 }
 
 var Client *mongo.Client = DBSet()
 
-func UserData(client *mongo.Client, CollectionName string) *mongo.Collection {
-	var collection *mongo.Collection = client.Database("DebateMap").Collection(CollectionName)
-	return collection
-}
-
 func DebateMapData(client *mongo.Client, CollectionName string) *mongo.Collection {
-	var debatemapcollection *mongo.Collection = client.Database("DebateMap").Collection(CollectionName)
+	var debatemapcollection *mongo.Collection = client.Database("testDebateMap").Collection(CollectionName)
 	return debatemapcollection
 }
