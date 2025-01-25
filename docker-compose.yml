@@ -4,10 +4,7 @@ services:
   backend:
     build:
       context: .
-    ports:
-      - "8000:8000"
     environment:
-      - PORT=8000
       - MONGO_URI=mongodb+srv://dahuizhusong:QxKbmBzJ55CqUAw0@cluster0.ijfwg.mongodb.net/?retryWrites=true&w=majority
       - SECRET_LOVE=your_secret_key
     depends_on:
