@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	// "os"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -11,8 +12,11 @@ import (
 )
 
 func DBSet() *mongo.Client {
-	uri := "mongodb://mongo:27017"
-	clientOptions := options.Client().ApplyURI(uri)
+	// uri := os.Getenv("MONGODB_URI")
+	// if uri == "" {
+	// 	log.Fatal("MONGODB_URI is not set")
+	// }
+	clientOptions := options.Client().ApplyURI("mongodb+srv://dahuizhusong:QxKbmBzJ55CqUAw0@cluster0.ijfwg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 	client, err := mongo.NewClient(clientOptions)
 	if err != nil {
 		log.Fatal(err)
