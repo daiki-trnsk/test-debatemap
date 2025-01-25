@@ -34,6 +34,10 @@ func main() {
         AllowMethods: []string{echo.GET, echo.POST, echo.PUT, echo.DELETE},
     }))
 
+	e.GET("/", func(c echo.Context) error {
+        return c.String(200, "Welcome to DebateMap API")
+    })
+
 	auth := e.Group("")
 	auth.GET("/debatemaps_list", controllers.GetDebateMaps)
 	auth.GET("/debatemap/:id", controllers.GetDebateMap)
