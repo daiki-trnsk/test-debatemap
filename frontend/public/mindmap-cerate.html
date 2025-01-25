@@ -29,7 +29,7 @@
 <script>
     let elem = document.getElementById("message-area");
     const postApi = async (content) => {
-        const API_HOST = 'http://localhost:8000'
+        const API_HOST = 'https://test-debatemap-api.onrender.com'
         const POSTARTICLE_ENDPOINT = "/adddebatemap";
         const URL = API_HOST + POSTARTICLE_ENDPOINT;
         const responce = await fetch(URL, {

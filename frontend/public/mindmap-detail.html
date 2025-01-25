@@ -34,7 +34,7 @@
 
 <script type="text/javascript">
   const getMindMapDetailApi = async (mindmapId) => {
-    const API_HOST = "http://localhost:8000";
+    const API_HOST = "https://test-debatemap-api.onrender.com";
     const URL = `${API_HOST}/debatemap/${mindmapId}`;
 
     try {
@@ -119,7 +119,7 @@
     console.log("Saving mindmap data: ", mind_data);
 
     const mindmapId = new URLSearchParams(location.search).get("mindmapId");
-    const API_HOST = "http://localhost:8000";
+    const API_HOST = "https://test-debatemap-api.onrender.com";
     const url = `${API_HOST}/update/${mindmapId}`;
     const headers = {
       "Content-Type": "application/json",
