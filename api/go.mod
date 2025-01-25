@@ -1,4 +1,4 @@
-module github.com/daiki-trnsk/test-debatemap
+module github.com/daiki-trnsk/test-debatemap/api
 
 go 1.20
 

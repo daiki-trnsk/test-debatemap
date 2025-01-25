@@ -7,11 +7,9 @@ ENV GO111MODULE=on
 COPY go.mod go.sum ./
 RUN go mod download
 
-COPY . ./
+COPY . .
 
-WORKDIR /app/api
-
-RUN go build -o main ./api/main.go
+RUN go build -o main ./main.go
 
 EXPOSE 8000
 
