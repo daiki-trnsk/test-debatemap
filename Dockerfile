@@ -13,4 +13,6 @@ WORKDIR /app/api
 
 RUN go build -o main main.go
 
+EXPOSE 8000
+
 CMD ["./main"]
