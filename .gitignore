@@ -6,3 +6,8 @@
 #コミットしたくないなら
 #git update-index --assume-unchanged api/.env
 
+
+/frontend/public/jsmind/.DS_Store
+/frontend/public/jsmind/node_modules/
+/frontend/public/jsmind/es6/*.js
+/frontend/public/jsmind/es6/*.js.map
