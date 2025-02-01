@@ -1,0 +1,8 @@
+/api/.env
+.env
+
+#コミットしたくなったら
+#git update-index --no-assume-unchanged api/.env
+#コミットしたくないなら
+#git update-index --assume-unchanged api/.env
+

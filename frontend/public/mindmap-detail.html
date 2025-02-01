@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>DebateMap</title>
+  <script src="js/common.js"></script>
   <link rel="stylesheet" href="css/general.css">
-  <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsmind@0.8.4/style/jsmind.css" />
-  <script src="https://cdn.jsdelivr.net/npm/jsmind@0.8.4/es6/jsmind.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jsmind@0.8.4/es6/jsmind.draggable-node.js"></script>
+  <link type="text/css" rel="stylesheet" href="jsmind/style/jsmind.css" />
+  <script type="module" src="jsmind/src/jsmind.js"></script>
   <style type="text/css">
     #jsmind_container {
       width: 99.9%;
@@ -30,124 +30,124 @@
   <div class="footer">
     <p>操作方法：任意の投稿を選択(青色)、Enterで返信を作成、Deleteで削除　</p>
   </div>
-</body>
 
-<script type="text/javascript">
-  const getMindMapDetailApi = async (mindmapId) => {
-    const API_HOST = "https://test-debatemap-api.onrender.com";
-    const URL = `${API_HOST}/debatemap/${mindmapId}`;
+  <script type="module">
+    import('./jsmind/src/jsmind.js')
+      .then(({ default: jsMind }) => {
+        window.jsMind = jsMind;
 
-    try {
-      const response = await fetch(URL, { 
-        method: "GET" ,
-        headers: {
-                "Content-Type": "application/json",
-            },
-          });
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return await response.json();
-    } catch (error) {
-      console.error("Fetch error:", error);
-    }
-  };
-  // TODO: meta format 意味要確認
-  // mindmap title
-  // mindmap data
-  var mind = {
-    meta: {
-      name: "demo",
-      version: "0.2",
-    },
-    format: "node_tree",
-    data: {},
-  };
+        var mind = {
+          meta: {
+            name: "demo",
+            version: "0.2",
+          },
+          format: "node_tree",
+          data: {},
+        };
 
-  var options = {
-    container: "jsmind_container",
-    editable: true,
-    theme: "nephrite",
-    view: {
-      node_overflow: 'wrap',
-      draggable: true,
-      hide_scrollbars_when_draggable: true,
-    },
-    shortcut: {
-      mapping: {
-        addchild: 13,
-        addbrother: [45, 4096 + 13],
-      }
-    }
-  };
-  var jm = new jsMind(options);
-  // jm.show(mind);
-  // jm.set_readonly(true);
-  // var mind_data = jm.get_data();
-  // alert(mind_data);
-  // jm.add_node("sub2", "sub23", "new node", { "background-color": "red" });
-  // jm.set_node_color("sub21", "green", "#ccc");
+        var options = {
+          container: "jsmind_container",
+          editable: true,
+          theme: "nephrite",
+          view: {
+            node_overflow: 'wrap',
+            draggable: true,
+            hide_scrollbars_when_draggable: true,
+          },
+          shortcut: {
+            mapping: {
+              addchild: 13,
+              addbrother: [45, 4096 + 13],
+              delnode: 9999,
+              editnode: 9999,
+            }
+          }
+        };
 
-  // const getMindMapNodesData = () => {
-  //   const mind_data = jm.get_data().data;
-  //   console.log(mind_data);
-  // };
-  const loadMindMap = async () => {
-    const mindmapId = new URLSearchParams(location.search).get("mindmapId");
-    if (!mindmapId) {
-      alert("MindMapIDが指定されていません");
-      location.href = "/index.html";
-    }
+        let jm;
+        try {
+          jm = new jsMind(options);
+        } catch (error) {
+          console.error("Error initializing jsMind:", error);
+        }
 
-    try {
-      const mindmapData = await getMindMapDetailApi(mindmapId);
-      console.log("mindmapData", mindmapData)
-      mind.data = mindmapData.nodes_json;
-      jm.show(mind);
-      var rootNodeId = mind.data.id;
-      jm.set_node_color(rootNodeId, 'green', '#f4f4f4');
-    } catch (error) {
-      console.error("Error fetching Mindmap detail:", error);
-      // エラーハンドリング
-    }
-  };
+        const loadMindMap = async () => {
+          const mindmapId = new URLSearchParams(location.search).get("mindmapId");
+          if (!mindmapId) {
+            alert("MindMapIDが指定されていません");
+            location.href = "/index.html";
+          }
 
-  loadMindMap();
+          try {
+            const mindmapData = await getMindMapDetailApi(mindmapId);
+            mind.data = mindmapData.nodes_json;
+            jm.show(mind);
+            var rootNodeId = mind.data.id;
+            jm.set_node_color(rootNodeId, 'green', '#f4f4f4');
+          } catch (error) {
+            console.error("Error fetching Mindmap detail:", error);
+          }
+        };
 
-  const saveMindMapNodesData = async () => {
-    const mind_data = jm.get_data().data;
-    console.log("Saving mindmap data: ", mind_data);
+        loadMindMap();
 
-    const mindmapId = new URLSearchParams(location.search).get("mindmapId");
-    const API_HOST = "https://test-debatemap-api.onrender.com";
-    const url = `${API_HOST}/update/${mindmapId}`;
-    const headers = {
-      "Content-Type": "application/json",
-    };
+        const saveMindMapNodesData = async () => {
+          const mind_data = jm.get_data().data;
+          console.log("Saving mindmap data: ", mind_data);
 
-    try {
-      const response = await fetch(url, {
-        method: "PUT",
-        headers,
-        body: JSON.stringify({
-          nodes_json: mind_data
-        })
+          const mindmapId = new URLSearchParams(location.search).get("mindmapId");
+          const url = `${API_HOST}/update/${mindmapId}`;
+          const headers = {
+            "Content-Type": "application/json",
+          };
+
+          try {
+            const response = await fetch(url, {
+              method: "PUT",
+              headers,
+              body: JSON.stringify({
+                nodes_json: mind_data
+              })
+            });
+
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`)
+            }
+            console.log("Mindmap data saved successfully!");
+          } catch (error) {
+            console.error("Save error", error)
+          }
+        };
+
+        jm.add_event_listener(function (type, data) {
+          if (type === jsMind.event_type.edit) {
+            saveMindMapNodesData();
+          }
+        });
+      })
+      .catch(error => {
+        console.error('Failed to load jsMind:', error);
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`)
+    const getMindMapDetailApi = async (mindmapId) => {
+      const URL = `${API_HOST}/debatemap/${mindmapId}`;
+
+      try {
+        const response = await fetch(URL, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return await response.json();
+      } catch (error) {
+        console.error("Fetch error:", error);
       }
-      console.log("Mindmap data saved successfully!");
-    } catch (error) {
-      console.error("Save error", error)
-    }
-  };
-  
-  jm.add_event_listener(function (type, data) {
-      if (type === jsMind.event_type.edit) {
-        saveMindMapNodesData();
-      }
-    });
-</script>
+    };
+  </script>
+</body>
 
 </html>

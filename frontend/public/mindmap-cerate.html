@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>DebateMap</title>
+    <script src="js/common.js"></script>
     <link rel="stylesheet" href="css/general.css">
 </head>
 
@@ -29,7 +30,6 @@
 <script>
     let elem = document.getElementById("message-area");
     const postApi = async (content) => {
-        const API_HOST = 'https://test-debatemap-api.onrender.com'
         const POSTARTICLE_ENDPOINT = "/adddebatemap";
         const URL = API_HOST + POSTARTICLE_ENDPOINT;
         const responce = await fetch(URL, {
@@ -48,7 +48,6 @@
             root_node_topic: DTEXT,
         };
         const response = await postApi(content);
-        console.log(content);
         elem.innerHTML = `${response}`;
         DBOX.value = "";
     };
