@@ -81,7 +81,7 @@ export class ShortcutProvider {
         var selected_node = _jm.get_selected_node();
         if (!!selected_node) {
             var node_id = this._newid();
-            var node = _jm.add_node(selected_node, node_id, 'New Node');
+            var node = _jm.add_node(selected_node, node_id, 'Someone is typing...');
             if (!!node) {
                 _jm.select_node(node_id);
                 _jm.begin_edit(node_id);
@@ -92,7 +92,7 @@ export class ShortcutProvider {
         var selected_node = _jm.get_selected_node();
         if (!!selected_node && !selected_node.isroot) {
             var node_id = this._newid();
-            var node = _jm.insert_node_after(selected_node, node_id, 'New Node');
+            var node = _jm.insert_node_after(selected_node, node_id, 'Someone is typing...');
             if (!!node) {
                 _jm.select_node(node_id);
                 _jm.begin_edit(node_id);

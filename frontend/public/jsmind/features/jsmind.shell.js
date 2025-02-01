@@ -42,7 +42,7 @@
                 if (
                     command.action === 'update_node' &&
                     prev_command.action === 'add_node' &&
-                    prev_command.data[2] === 'New Node'
+                    prev_command.data[2] === 'Someone is typing...'
                 ) {
                     prev_command.data[2] = command.data[1];
                     this.commands[this.step - 1] = prev_command;
