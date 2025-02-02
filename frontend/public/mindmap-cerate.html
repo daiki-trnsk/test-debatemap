@@ -3,15 +3,25 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>DebateMap</title>
+    <meta name="description" content="Mapargu is a discussion-friendly SNS based on mind maps, making debates easy to visualize." />
+    <title>Mapargu - Mind Map Based Discussion SNS</title>
     <script src="js/common.js"></script>
     <link rel="stylesheet" href="css/general.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TCRC0V2B22"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-TCRC0V2B22');
+    </script>
 </head>
 
 <body>
     <div class="header">
         <h1><a href="index.html">⇦</a></h1>
-        <h1 class="title">DebateMap</h1>
+        <h1 class="title">Mapargu</h1>
     </div>
     <div class="createMain">
         <div class="createBox">
@@ -48,7 +58,7 @@
             root_node_topic: DTEXT,
         };
         const response = await postApi(content);
-        elem.innerHTML = `${response}`;
+        elem.textContent = response;;
         DBOX.value = "";
     };
 </script>

@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>DebateMap</title>
+  <meta name="description" content="Mapargu is a discussion-friendly SNS based on mind maps, making debates easy to visualize." />
+  <title>Mapargu - Mind Map Based Discussion SNS</title>
   <script src="js/common.js"></script>
   <link rel="stylesheet" href="css/general.css">
   <link type="text/css" rel="stylesheet" href="jsmind/style/jsmind.css" />
@@ -17,18 +18,29 @@
       background: #f4f4f4;
     }
   </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TCRC0V2B22"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-TCRC0V2B22');
+  </script>
+
 </head>
 
 <body>
   <div class="header">
     <h1><a href="index.html">⇦</a></h1>
-    <h1 class="title">DebateMap</h1>
+    <h1 class="title">Mapargu</h1>
   </div>
   <div class="main">
     <div id="jsmind_container"></div>
   </div>
   <div class="footer">
-    <p>Operation: Select any post (blue), press Enter to create a reply, and press Enter again to post after typing.　</p>
+    <p>Operation: Select any post (blue), press Enter to create a reply, and press Enter again to post after typing.　
+    </p>
   </div>
 
   <script type="module">
