@@ -65,9 +65,9 @@ export class ViewProvider {
                 evt.stopPropagation();
             }
         });
-        $.on(this.e_editor, 'blur', function (e) {
-            v.edit_node_end();
-        });
+        // $.on(this.e_editor, 'blur', function (e) {
+        //     v.edit_node_end();
+        // });
 
         this.container.appendChild(this.e_panel);
 

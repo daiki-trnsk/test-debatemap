@@ -22,10 +22,9 @@
         </div>
 
         <div class="searchBox">
-            <form id="searchForm" action="#">
+            <form id="searchForm" action="#" onsubmit="searchDebateMaps(event)">
                 <input id="search" type="text" autocomplete="off" placeholder="Search Topic">
-                <button id="sbtn" type="submit" onclick="searchDebateMaps()"><i
-                        class="fa-solid fa-magnifying-glass"></i></button>
+                <button id="sbtn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
         </div>
 
@@ -76,7 +75,8 @@
     };
     getMultiReplies();
 
-    const searchDebateMaps = async () => {
+    const searchDebateMaps = async (event) => {
+        event.preventDefault();
         const searchValue = document.getElementById("search").value;
         if (searchValue == "") {
             getMultiReplies();

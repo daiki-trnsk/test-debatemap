@@ -79,13 +79,14 @@ jmnode {
     background-color: #fff;
     color: #333;
     border-radius: 5px;
-    box-shadow: 1px 1px 1px #666;
+    /* box-shadow: 1px 1px 1px #666; */
     font: 16px/1.125 Verdana, Arial, Helvetica, sans-serif;
 }
 jmnode:hover {
     box-shadow: 2px 2px 8px #000;
     background-color: #ebebeb;
     color: #333;
+    transition-duration: .1s;
 }
 jmnode.selected {
     background-color: #11f;
